@@ -9,3 +9,10 @@ Remove-Item -Path $installerPath
 # Run Install Mso Service
 $installerPath = "C:\InstallMSOService\InstallMSOService.exe"
 Start-Process -FilePath $installerPath -ArgumentList "/silent /install" -Wait
+
+# Install certs
+Import-PfxCertificate -CertStoreLocation Cert:\CurrentUser\My -FilePath C:\InstallPreReqCerts\kvcert.pfx
+Import-PfxCertificate -CertStoreLocation Cert:\CurrentUser\My -FilePath C:\InstallPreReqCerts\kvreader.pfx
+Import-PfxCertificate -CertStoreLocation Cert:\CurrentUser\My -FilePath C:\InstallPreReqCerts\auth.pfx
+Import-PfxCertificate -CertStoreLocation Cert:\CurrentUser\My -FilePath C:\InstallPreReqCerts\management.pfx
+

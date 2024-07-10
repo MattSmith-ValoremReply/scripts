@@ -21,3 +21,28 @@ Import-PfxCertificate -CertStoreLocation Cert:\LocalMachine\My -FilePath C:\Inst
 Import-PfxCertificate -CertStoreLocation Cert:\LocalMachine\My -FilePath C:\InstallPreReqCerts\auth.pfx
 Import-PfxCertificate -CertStoreLocation Cert:\LocalMachine\My -FilePath C:\InstallPreReqCerts\management.pfx
 
+# PowerShell PreReqs
+try
+{
+	Uninstall-Module -Name AIPService -Force
+}
+catch
+{
+	# Ignore. Move on.
+}
+
+try
+{
+	Uninstall-Module -Name ExchangeOnlineManagement -Force
+}
+catch
+{
+	# Ignore. Move on.
+}
+
+
+Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+Install-Module SharePointPnPPowerShellOnline -Force
+Install-Module -Name AIPService -RequiredVersion 2.0.0.3 -Scope AllUsers -Force -AllowClobber
+Install-Module -Name MicrosoftTeams -MinimumVersion 4.0.0 -Scope AllUsers -Force -AllowClobber
+Install-Module -Name ExchangeOnlineManagement -RequiredVersion 3.2.0 -Scope AllUsers -Force -AllowClobber

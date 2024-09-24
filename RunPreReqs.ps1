@@ -45,7 +45,7 @@ catch
 Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
 Install-Module SharePointPnPPowerShellOnline -Force
 Install-Module -Name AIPService -RequiredVersion 2.0.0.3 -Scope AllUsers -Force -AllowClobber
-Install-Module -Name MicrosoftTeams -MinimumVersion 4.0.0 -Scope AllUsers -Force -AllowClobber
+Install-Module -Name MicrosoftTeams -RequiredVersion 4.0.0 -Scope AllUsers -Force -AllowClobber
 Install-Module -Name ExchangeOnlineManagement -RequiredVersion 3.2.0 -Scope AllUsers -Force -AllowClobber
 
 # Run Hydration Engine

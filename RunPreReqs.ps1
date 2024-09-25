@@ -9,6 +9,9 @@ Remove-Item -Path $installerPath
 $installerPath = "C:\InstallMSOService\InstallMSOService.exe"
 Start-Process -FilePath $installerPath -ArgumentList "/silent /install" -Wait
 
+# Install the PowerApps CLI
+Start-Process msiexec.exe -ArgumentList '/qn', '/i', 'C:\PowerAppsCLI\powerapps-cli-1.0.msi', '/norestart' -NoNewWindow -Wait
+
 # Install certs
 Import-PfxCertificate -CertStoreLocation Cert:\CurrentUser\My -FilePath C:\InstallPreReqCerts\kvcert.pfx
 Import-PfxCertificate -CertStoreLocation Cert:\CurrentUser\My -FilePath C:\InstallPreReqCerts\kvcert2.pfx

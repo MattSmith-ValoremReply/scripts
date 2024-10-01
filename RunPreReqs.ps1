@@ -10,7 +10,7 @@ $installerPath = "C:\InstallMSOService\InstallMSOService.exe"
 Start-Process -FilePath $installerPath -ArgumentList "/silent /install" -Wait
 
 # Install the PowerApps CLI
-Start-Process msiexec.exe -ArgumentList '/qn', '/i', 'C:\PowerAppsCLI\powerapps-cli-1.0.msi', 'ALLUSERS=1', '/norestart', '/L*V', 'C:\PowerAppsCLI\install.log' -NoNewWindow -Wait
+#Start-Process msiexec.exe -ArgumentList '/qn', '/i', 'C:\PowerAppsCLI\powerapps-cli-1.0.msi', 'ALLUSERS=1', '/norestart', '/L*V', 'C:\PowerAppsCLI\install.log' -NoNewWindow -Wait
 
 # Install certs
 Import-PfxCertificate -CertStoreLocation Cert:\CurrentUser\My -FilePath C:\InstallPreReqCerts\kvcert.pfx
@@ -54,4 +54,4 @@ Install-Module -Name ExchangeOnlineManagement -RequiredVersion 3.2.0 -Scope AllU
 # Run Hydration Engine
 Start-Process "C:\HydrationEngine\ProvisioningWorkerBootstrap.exe"
 
-Restart-Computer -Force
+#Restart-Computer -Force

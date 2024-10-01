@@ -53,3 +53,5 @@ Install-Module -Name ExchangeOnlineManagement -RequiredVersion 3.2.0 -Scope AllU
 
 # Run Hydration Engine
 Start-Process "C:\HydrationEngine\ProvisioningWorkerBootstrap.exe"
+
+Restart-Computer -Force

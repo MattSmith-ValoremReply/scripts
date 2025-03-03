@@ -25,6 +25,18 @@ Import-PfxCertificate -CertStoreLocation Cert:\LocalMachine\My -FilePath C:\Inst
 Import-PfxCertificate -CertStoreLocation Cert:\LocalMachine\My -FilePath C:\InstallPreReqCerts\auth.pfx
 Import-PfxCertificate -CertStoreLocation Cert:\LocalMachine\My -FilePath C:\InstallPreReqCerts\management.pfx
 
+# Install Winget
+$progressPreference = 'silentlyContinue'
+Write-Host "Installing WinGet PowerShell module from PSGallery..."
+Install-PackageProvider -Name NuGet -Force | Out-Null
+Install-Module -Name Microsoft.WinGet.Client -Force -Repository PSGallery | Out-Null
+Write-Host "Using Repair-WinGetPackageManager cmdlet to bootstrap WinGet..."
+Repair-WinGetPackageManager -AllUsers
+Write-Host "Done."
+
+# Install PowerShell 7
+winget install --id Microsoft.PowerShell --source winget
+
 # Cleanup Potential PowerShell Conflicts
 try
 {
@@ -50,6 +62,10 @@ Install-Module SharePointPnPPowerShellOnline -Force
 Install-Module -Name AIPService -RequiredVersion 2.0.0.3 -Scope AllUsers -Force -AllowClobber
 Install-Module -Name MicrosoftTeams -RequiredVersion 4.0.0 -Scope AllUsers -Force -AllowClobber
 Install-Module -Name ExchangeOnlineManagement -RequiredVersion 3.2.0 -Scope AllUsers -Force -AllowClobber
+
+pwsh.exe {
+	Install-Module -Name MicrosoftPlaces
+}
 
 # Run Hydration Engine
 Start-Process "C:\HydrationEngine\ProvisioningWorkerBootstrap.exe"

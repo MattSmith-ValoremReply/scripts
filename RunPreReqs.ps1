@@ -25,17 +25,13 @@ Import-PfxCertificate -CertStoreLocation Cert:\LocalMachine\My -FilePath C:\Inst
 Import-PfxCertificate -CertStoreLocation Cert:\LocalMachine\My -FilePath C:\InstallPreReqCerts\auth.pfx
 Import-PfxCertificate -CertStoreLocation Cert:\LocalMachine\My -FilePath C:\InstallPreReqCerts\management.pfx
 
-# Install Winget
-$progressPreference = 'silentlyContinue'
-Write-Host "Installing WinGet PowerShell module from PSGallery..."
-Install-PackageProvider -Name NuGet -Force | Out-Null
-Install-Module -Name Microsoft.WinGet.Client -Force -Repository PSGallery | Out-Null
-Write-Host "Using Repair-WinGetPackageManager cmdlet to bootstrap WinGet..."
-Repair-WinGetPackageManager -AllUsers
-Write-Host "Done."
-
-# Install PowerShell 7
-winget install --id Microsoft.PowerShell --source winget
+# PowerShell 7 Installation Script
+$ps7InstallerUrl = "https://github.com/PowerShell/PowerShell/releases/download/v7.2.9/PowerShell-7.2.9-win-x64.msi"
+$installerPath = "C:\temp-ps\PowerShell-7.2.9-win-x64.msi"
+New-Item -Path C:\temp-ps -ItemType Directory -Force
+Invoke-WebRequest -Uri $ps7InstallerUrl -OutFile $installerPath
+Start-Process msiexec.exe -ArgumentList "/i", $installerPath, "/quiet", "/norestart" -NoNewWindow -Wait
+Remove-Item $installerPath -Force
 
 # Cleanup Potential PowerShell Conflicts
 try

@@ -26,8 +26,8 @@ Import-PfxCertificate -CertStoreLocation Cert:\LocalMachine\My -FilePath C:\Inst
 Import-PfxCertificate -CertStoreLocation Cert:\LocalMachine\My -FilePath C:\InstallPreReqCerts\management.pfx
 
 # PowerShell 7 Installation Script
-$ps7InstallerUrl = "https://github.com/PowerShell/PowerShell/releases/download/v7.2.9/PowerShell-7.2.9-win-x64.msi"
-$installerPath = "C:\temp-ps\PowerShell-7.2.9-win-x64.msi"
+$ps7InstallerUrl = "https://github.com/PowerShell/PowerShell/releases/download/v7.5.0/PowerShell-7.5.0-win-x64.msi"
+$installerPath = "C:\temp-ps\PowerShell-7.5.0-win-x64.msi"
 New-Item -Path C:\temp-ps -ItemType Directory -Force
 Invoke-WebRequest -Uri $ps7InstallerUrl -OutFile $installerPath
 Start-Process msiexec.exe -ArgumentList "/i", $installerPath, "/quiet", "/norestart" -NoNewWindow -Wait
